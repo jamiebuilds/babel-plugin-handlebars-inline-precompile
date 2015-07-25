@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-handlebars-inline-precompile",
   "description": "Precompile inline Handlebars templates",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "repository": "thejameskyle/babel-plugin-handlebars-inline-precompile",
   "license": "MIT",
