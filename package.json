@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-handlebars-inline-precompile",
   "description": "",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": "thejameskyle/babel-plugin-handlebars-inline-precompile",
   "license": "MIT",
   "main": "lib/index.js",
