@@ -4,6 +4,12 @@ export default function({ Plugin, types: t }) {
   const IMPORT_NAME = 'handlebars-inline-precompile';
   const IMPORT_PROP = '_handlebarsImportSpecifier';
 
+  function isReferenceToImport(node, file) {
+    return t.isIdentifier(node, {
+      name: file[IMPORT_PROP] && file[IMPORT_PROP].input
+    });
+  }
+
   // Precompile template and replace node.
   function compile(visitor, template, importName) {
     let precompiled = Handlebars.precompile(template);
@@ -48,7 +54,7 @@ export default function({ Plugin, types: t }) {
 
     CallExpression(node, parent, scope, file) {
       // filter out anything other than `hbs`.
-      if (!t.isIdentifier(node.callee, { name: file[IMPORT_PROP].input })) {
+      if (!isReferenceToImport(node.callee, file)) {
         return;
       }
 
@@ -71,7 +77,7 @@ export default function({ Plugin, types: t }) {
 
     TaggedTemplateExpression(node, parent, scope, file) {
       // filter out anything other than `hbs`.
-      if (!t.isIdentifier(node.tag, { name: file[IMPORT_PROP].input })) {
+      if (!isReferenceToImport(node.tag, file)) {
         return;
       }
 
