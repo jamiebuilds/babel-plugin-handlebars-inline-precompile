@@ -1,0 +1,24 @@
+{
+  "name": "babel-plugin-handlebars-inline-precompile",
+  "description": "Precompile inline Handlebars templates",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "thejameskyle/babel-plugin-handlebars-inline-precompile",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "devDependencies": {
+    "babel": "^5.8.5",
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "build": "babel-plugin build",
+    "push": "babel-plugin publish",
+    "test": "mocha --compilers js:babel/register"
+  },
+  "keywords": [
+    "babel-plugin"
+  ],
+  "dependencies": {
+    "handlebars": "^3.0.3"
+  }
+}
