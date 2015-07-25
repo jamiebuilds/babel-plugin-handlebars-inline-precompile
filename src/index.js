@@ -27,7 +27,7 @@ export default function({ Plugin, types: t }) {
   // Precompile template and replace node.
   function compile(visitor, template, importName) {
     let precompiled = Handlebars.precompile(template);
-    visitor.replaceWithSourceString(`${importName}.template((${precompiled}).main)`);
+    visitor.replaceWithSourceString(`${importName}.template(${precompiled})`);
   }
 
   let visitor = {
