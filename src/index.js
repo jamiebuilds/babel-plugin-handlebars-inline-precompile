@@ -4,6 +4,20 @@ export default function({ Plugin, types: t }) {
   const IMPORT_NAME = 'handlebars-inline-precompile';
   const IMPORT_PROP = '_handlebarsImportSpecifier';
 
+  function createImport(name) {
+    return t.variableDeclaration('const', [
+      t.variableDeclarator(
+        t.identifier(name),
+        t.memberExpression(
+          t.callExpression(t.identifier('require'), [
+            t.literal('handlebars/runtime')
+          ]),
+          t.identifier('default')
+        )
+      )
+    ]);
+  }
+
   function isReferenceToImport(node, file) {
     return t.isIdentifier(node, {
       name: file[IMPORT_PROP] && file[IMPORT_PROP].input
@@ -44,8 +58,7 @@ export default function({ Plugin, types: t }) {
         output: name
       };
 
-      first.local.name = name;
-      node.source.value = 'handlebars/runtime';
+      return createImport(name);
     },
 
     /**
