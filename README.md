@@ -23,7 +23,7 @@ _Handlebars.template({ /* A bunch of crazy template stuff */ })
 ## Installation
 
 ```sh
-$ npm install babel-plugin-handlebars-templates
+$ npm install babel-plugin-handlebars-inline-precompile
 ```
 
 ## Usage
@@ -34,20 +34,20 @@ $ npm install babel-plugin-handlebars-templates
 
 ```json
 {
-  "plugins": ["handlebars-templates"]
+  "plugins": ["handlebars-inline-precompile"]
 }
 ```
 
 ### Via CLI
 
 ```sh
-$ babel --plugins handlebars-templates script.js
+$ babel --plugins handlebars-inline-precompile script.js
 ```
 
 ### Via Node API
 
 ```javascript
 require("babel-core").transform("code", {
-  plugins: ["handlebars-templates"]
+  plugins: ["handlebars-inline-precompile"]
 });
 ```
