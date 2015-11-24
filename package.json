@@ -6,13 +6,15 @@
   "license": "MIT",
   "main": "lib/index.js",
   "devDependencies": {
-    "babel": "^5.8.5",
+    "babel-cli": "^6.2.0",
+    "babel-core": "^6.2.1",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-register": "^6.2.0",
     "mocha": "^2.2.5"
   },
   "scripts": {
-    "build": "babel-plugin build",
-    "push": "babel-plugin publish",
-    "test": "mocha --compilers js:babel/register"
+    "build": "babel src -d lib",
+    "test": "mocha --compilers js:babel-register"
   },
   "keywords": [
     "babel-plugin"

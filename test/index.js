@@ -1,8 +1,8 @@
-const path   = require("path");
-const fs     = require("fs");
-const assert = require("assert");
-const babel  = require("babel");
-const plugin = require("../src/index");
+import path from "path";
+import fs from "fs";
+import assert from "assert";
+import * as babel from "babel-core";
+import plugin from "../src/index";
 
 function trim(str) {
   return str.replace(/^\s+|\s+$/, "");
@@ -15,10 +15,7 @@ describe("turn jsx into incremental-dom", () => {
     it(`should ${caseName.split("-").join(" ")}`, () => {
       const fixtureDir = path.join(fixturesDir, caseName);
       const actual     = babel.transformFileSync(
-        path.join(fixtureDir, "actual.js"), {
-          blacklist: ['react'],
-          plugins: [plugin]
-        }
+        path.join(fixtureDir, "actual.js")
       ).code;
       const expected = fs.readFileSync(path.join(fixtureDir, "expected.js")).toString();
 
