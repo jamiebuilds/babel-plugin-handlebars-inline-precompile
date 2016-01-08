@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 
-export default function({ Plugin, types: t }) {
+export default function({ types: t }) {
   const IMPORT_NAME = 'handlebars-inline-precompile';
   const IMPORT_PROP = '_handlebarsImportSpecifier';
 
