@@ -43,16 +43,14 @@ export default function({ types: t }) {
           throw this.errorWithNode(node, `Only \`import hbs from '${IMPORT_NAME}'\` is supported. You used: \`${usedImportStatement}\``);
         }
 
-        let name = scope.generateUidIdentifier('Handlebars').name;
+        const { name } = file.addImport('handlebars/runtime', 'default', scope.generateUid('Handlebars'));
+        path.remove();
 
         // Store the import name to lookup references elsewhere.
         file[IMPORT_PROP] = {
           input: first.local.name,
           output: name
         };
-
-        file.addImport('handlebars/runtime', 'default', name);
-        path.remove();
       },
 
       /**
