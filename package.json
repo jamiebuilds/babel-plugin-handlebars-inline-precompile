@@ -20,6 +20,7 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "resolve-cwd": "^1.0.0"
   }
 }

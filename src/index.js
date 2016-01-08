@@ -1,4 +1,9 @@
-import Handlebars from 'handlebars';
+import resolveCwd from 'resolve-cwd'
+
+// Use local handlebars (if installed as a peer) rather than the version that
+// came with this plugin. Allows a newer handlebars to be used without needing
+// to upgrade this package.
+const Handlebars = require(resolveCwd('handlebars') || 'handlebars')
 
 export default function({ types: t }) {
   const IMPORT_NAME = 'handlebars-inline-precompile';
