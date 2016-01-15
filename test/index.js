@@ -8,11 +8,11 @@ function trim(str) {
   return str.replace(/^\s+|\s+$/, "");
 }
 
-describe("turn jsx into incremental-dom", () => {
+describe("precompiles inline templates", () => {
   const fixturesDir = path.join(__dirname, "fixtures");
 
   fs.readdirSync(fixturesDir).map((caseName) => {
-    it(`should ${caseName.split("-").join(" ")}`, () => {
+    it(`works for ${caseName.split("-").join(" ")}`, () => {
       const fixtureDir = path.join(fixturesDir, caseName);
       const actual     = babel.transformFileSync(
         path.join(fixtureDir, "actual.js")
