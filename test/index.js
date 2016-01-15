@@ -77,3 +77,9 @@ describe("`hbs` is used as a tagged template expression, with a template string 
       check("placeholders inside a tagged template string are not supported"));
   });
 });
+
+describe("other tagged template expressions occur", () => {
+  it("ignores them", () => {
+    assert.doesNotThrow(attempt("function foo () {}; foo`bar`"))
+  })
+});
