@@ -39,8 +39,8 @@ export default function({ types: t }) {
 
         // Throw an error if using anything other than the default import.
         if (!t.isImportDefaultSpecifier(first)) {
-          let usedImportStatement = file.code.slice(node.start, node.end);
-          throw this.errorWithNode(node, `Only \`import hbs from '${IMPORT_NAME}'\` is supported. You used: \`${usedImportStatement}\``);
+          let usedImportStatement = file.file.code.slice(node.start, node.end);
+          throw path.buildCodeFrameError(`Only \`import hbs from '${IMPORT_NAME}'\` is supported. You used: \`${usedImportStatement}\``);
         }
 
         const { name } = file.addImport('handlebars/runtime', 'default', scope.generateUid('Handlebars'));
@@ -65,14 +65,14 @@ export default function({ types: t }) {
           return;
         }
 
-        let template = node.arguments[0].value;
+        let template = node.arguments.length > 0 && node.arguments[0].value;
 
         // `hbs` should be called as `hbs('template')`.
         if (
           node.arguments.length !== 1 ||
           typeof template !== 'string'
         ) {
-          throw this.errorWithNode(node, `${node.callee.name} should be invoked with a single argument: the template string`);
+          throw path.buildCodeFrameError(`${node.callee.name} should be invoked with a single argument: the template string`);
         }
 
         compile(path, template, file[IMPORT_PROP].output);
@@ -92,7 +92,7 @@ export default function({ types: t }) {
 
         // hbs`${template}` is not supported.
         if (node.quasi.expressions.length) {
-          throw this.errorWithNode(node, 'placeholders inside a tagged template string are not supported');
+          throw path.buildCodeFrameError('placeholders inside a tagged template string are not supported');
         }
 
         let template = node.quasi.quasis.map(quasi => quasi.value.cooked).join('');
